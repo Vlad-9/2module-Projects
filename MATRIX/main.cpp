@@ -19,8 +19,10 @@ class Matrix {
     }
     
     Matrix(int lines , int columns) {
-        n = lines ;
-        m = columns ;
+        if (lines < 0 ) n = lines * -1; 
+        else n = lines ;
+        if (columns < 0) m = columns * -1;
+        else m = columns ;
         values = new int*[n] ;
         for(int i = 0 ; i < n ; i++)
             values[i] = new int[m] ;
@@ -108,6 +110,8 @@ class Matrix {
     }
     
     void operator=(Matrix const& mtrx) {
+        if(values==mtrx.values);
+        else {
         if(values != 0) {
             for(int i = 0 ; i < n ; i++)
                 delete[] values[i] ;
@@ -121,6 +125,7 @@ class Matrix {
         for(int i = 0 ; i < n ; i++)
             for(int j = 0 ; j < m ; j++)
                 values[i][j] = mtrx.values[i][j] ;
+        }
     }
     
     int& operator()(int i , int j) {
